@@ -1,18 +1,18 @@
 let rec hfs_f n =
     if n < 0 then
-        n
-    else if n == 0 then
+        -1
+    else if n = 0 then
         1
-    else if n > 0 then
-        n - hfs_m (hfs_f (n - 1))
+    else
+        n - (hfs_m (hfs_f (n - 1)))
 
 and hfs_m n =
     if n < 0 then
-        n
+        -1
     else if n = 0 then
         n
-    else 
-        n - hfs_f (hfs_m (n - 1))
+    else
+        n - (hfs_f (hfs_m (n - 1)))
 
 let main () =
     print_int (hfs_m 0);
