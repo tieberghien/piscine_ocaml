@@ -9,6 +9,8 @@ let main () =
     print_int (ft_power 1 4);
     print_char '\n';
     print_int (ft_power 0 5);
+    print_char '\n';
+    print_int (ft_power 5 0);
     print_char '\n'
 
 let () = main ()
