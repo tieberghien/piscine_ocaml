@@ -1,20 +1,19 @@
-(* let rec encode lst *) 
+let encode list =
+    let rec aux count acc = function
+      | [] -> [] (* Can only be reached if original list is empty *)
+      | [x] -> (count+1, x) :: acc
+      | a :: (b :: _ as t) -> if a = b then aux (count + 1) acc t
+                              else aux 0 ((count+1,a) :: acc) t in
+    List.rev (aux 0 [] list)
 
-let tuple_decode (n, elem) =
-  let rec add_one_elem i acc =
-      match i  with
-      | 0 -> acc
-      | i -> add_one_elem (i-1) (elem::acc)
-  in add_one_elem n []
-
-let rec print_list = function 
-    [] -> ()
-    | e::l -> print_char e ; print_string " " ; print_list l
-
-let pp_int_pair ppf (x,y) =
-    Printf.fprintf ppf "(%d,%s)" x y
+let rec print_tuples =
+  function
+  | [] -> ()
+  | (a, b) :: rest ->
+    Printf.printf "%i, %s; " a b;
+    print_tuples rest
 
 let main () =
-    print_list (tuple_decode (1,'A'))
+    print_tuples (encode ["a";"a";"a";"a";"b";"c";"c";"a";"a";"d";"e";"e";"e";"e"])
 
 let () = main ()
